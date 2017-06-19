@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load honeypot %}
+
+{% block content %}
+
+    <section id="lead" class="shadow">
+        <div id="lead-content">
+            <div>
+                <h2>{% trans 'My name is' %}</h2>
+                <h1 id="name" class="js-hidden" data-before="3~b1zt" data-after="r99mx">Dionýz Lazar</h1>
+            </div>
+            <h2>and I'm</h2>
+            <h2>{% trans dev_profile_title %}</h2>
+
+            <a id="download-resume" href="{{MEDIA_URL}}{% trans 'cv_en.pdf' %}" class="btn-rounded-white">
+                {% trans 'Download Resume' %}
+                <i class="icon icon-document-certificate">{% include 'svg/document-certificate.svg' %}</i>
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="">
+        <div class="container">
+            <h2 class="heading">{% trans 'About Me' %}</h2>
+            <div class="row">
+                <div class="project vertical-align  shadow-large">
+                    <div class="project-image col-sm-4">
+                        <img id="profile-img" class="shadow-large img-responsive" src="{{MEDIA_URL}}profile-min.jpg" alt="{% trans 'Profil picture' %}"/>
+                    </div>
+                    <div class="project-info col-sm-8">
+                        <p>
+                            {{ dev_blurb|linebreaks }}
+                        </p>
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+            </div><div class="row">
+                <div class="col-md-6">
+                    <h3 class="heading">{% trans 'Job success score' %}</h3>
+                    <div id="score">
+                        {% include 'svg/score.svg' %}
+                    </div>
+                </div>
+                <div class="col-md-6" id="skills">
+                    <h3 class="heading">{% trans 'Skills' %}</h3>
+                    <ul>
+                        {% for skill in skills %}
+                            <li class="shadow-large">{% trans skill %}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End #about -->
+    <section id="testimonials" class="">
+        <div class="container">
+            <h2 class="heading">{% trans 'Testimonials' %}</h2>
+            <div class="row">
+                {% for testimonial in assignments %}
+
+                    <div class="col-lg-8 {% if forloop.counter|divisibleby:2 %}pull-right{% else %}pull-left{% endif %}">
+                        <div class="block">
+                            <blockquote class="testimonial">
+                                <p>{{ testimonial.feedback }}</p>
+                            </blockquote>
+                            <p class="testimonial-author">{{testimonial.as_opening_title}}</p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="">
+        <h2 class="heading">{% trans 'Projects' %}</h2>
+        <div class="container">
+            <div class="row">
+                <div class="row">
+                    <div class="project vertical-align shadow-large">
+                        <div class=" col-sm-4 project-image">
+                            <a href="#img1">
+                                <img src="{{MEDIA_URL}}projects/marked_out-min.jpg" class="thumbnail img-responsive">
+                            </a>
+                            <a href="#_" class="lightbox" id="img1">
+                                <img src="{{MEDIA_URL}}projects/marked_out-min.jpg">
+                            </a>
+                        </div>
+                        <!-- End .project-image -->
+                        <div class=" col-sm-8 project-info">
+                            <h3>Animatronio.com</h3>
+                            <p>
+                                {% blocktrans %}The source of the images is a neural network which can combine style of one image with content of another image. It works really well with a combination of painting + photo content.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}Part of the fun of the project was actually finding out which parameters work and what kind of images work together. It's usually photos that have similar structure than the painting or they show similar perspective.{% endblocktrans %}
+                            </p>
+                            <a href="https://www.animatronio.com">View Animatronio.com</a>
+                        </div>
+                        <!-- End .project-info -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="project vertical-align shadow-large">
+                        <div class=" col-sm-4 project-image">
+                            <a href="#img2">
+                                <img src="{{MEDIA_URL}}projects/screencapture-127-0-0-1-8000-stock-11239-1496054345888-min.png" class="thumbnail img-responsive">
+                            </a>
+                            <a href="#_" class="lightbox" id="img2">
+                                <img src="{{MEDIA_URL}}projects/screencapture-127-0-0-1-8000-stock-11239-1496054345888-min.png">
+                            </a>
+                        </div>
+                        <!-- End .project-image -->
+                        <div class=" col-sm-8 project-info">
+                            <h3>Stock report web app</h3>
+                            <p>
+                                {% blocktrans %}The goal was to first collect trading data by scraping CSV files from a specific website and display it on a website in a dashboard.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}The data is collected every work day and saved in a postgres database. Currently there is about 5 million trades processed daily. After scraping is done the aggregated statistics are calculated for every Stock (calculated fairly quickly with raw SQL).{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}On the front-end, the tables are based on Datatables connected to the API from django. Feature wise there is also filtering/exporting feature to XLSX.{% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="project vertical-align shadow-large">
+                        <div class=" col-sm-4 project-image">
+                            <a href="#img3">
+                                <img src="{{MEDIA_URL}}projects/lotto-484782_960_720-min.jpg" class="thumbnail img-responsive">
+                            </a>
+                            <a href="#_" class="lightbox" id="img3">
+                                <img src="{{MEDIA_URL}}projects/lotto-484782_960_720-min.jpg">
+                            </a>
+                        </div>
+                        <!-- End .project-image -->
+                        <div class=" col-sm-8 project-info">
+                            <h3>Processing German Lottery</h3>
+                            <p>
+                                {% blocktrans %}Client's goal was to periodically get data from three different kinds of lotteries in Germany and load it into a MySQL database for further processing.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}Client prepared the initial database design, which needed to be tweaked a bit by me (changing few column types, adding unique index and so on). The main table has 50+ columns with mostly numerical data, which differ and overlap in use within the 3 different lotteries. Large challenge was processing the structured file properly and fixing any issues which arised due to inconsistencies within the data.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}Large focus of the project was configurability and flexibility of the script as it will run on schedule on the server. Script settings were separated into its own file for simpler usage. I also focused on making logging work seamlessly for both output to the console&syslog.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}I really liked this project. The data was new to me and it was a interesting kind of a challenge.{% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="project vertical-align shadow-large">
+                        <div class=" col-sm-4 project-image">
+                            <a href="#img4">
+                                <img src="{{MEDIA_URL}}projects/bitcoin-106808_960_720-min.jpg" class="thumbnail img-responsive">
+                            </a>
+                            <a href="#_" class="lightbox" id="img4">
+                                <img src="{{MEDIA_URL}}projects/bitcoin-106808_960_720-min.jpg">
+                            </a>
+                        </div>
+                        <!-- End .project-image -->
+                        <div class=" col-sm-8 project-info">
+                            <h3>Processing historic Bitcoin data from Poloniex</h3>
+                            <p>
+                                {% blocktrans %}Client first wanted me to import historic financial data from Poloniex (cryptocurrency market) API into a SQLite database. I had to ensure that the script pulls up complete history of trading for a specific symbol (currency pair like Bitcoin-Ethereum). The API responds with batches of trades of 50k and my script goes back as far as possible to get all the data without any duplicates into the database.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}After some discussion we agreed to switch to MySQL due to the amount of data and possible complications later down the line if we were stuck with SQLite. At the time I've processed about 4.5 million trades for Bitcoin-Ethereum currency pair which took ~700MB in the database.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}After the first milestone was done, the client wanted to collaborate more. So I setup another script which calculates data for candlestick-type chart (low, high, open, close, buy ratio) for intervals of N hours. Under the hood it was a wrapper around a fairly complex SQL query which can calculate the results incredibly fast even for millions of rows.{% endblocktrans %}
+                            </p>
+                            <p>
+                                {% blocktrans %}All-in-all it was a really cool project, the client was great and I'd love to work on similar projects in the future.{% endblocktrans %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="">
+        <div class="container">
+            <h2 class="heading">{% trans 'Education' %}</h2>
+            <div class="block">
+                <h3>{% trans 'Masaryk University, Faculty of Informatics in Brno' %}</h3>
+                <span class="education-date">{% trans 'Sept 2014 - Sept 2016' %}</span>
+                <h4>{% trans 'Information Systems' %}</h4>
+                <p>
+                    {% trans 'Studied on Faculty of Informatics in Brno.' %}
+                </p>
+            </div>
+
+            <div class="block">
+                <h3>{% trans 'Masaryk University' %}</h3>
+                <span class="education-date">{% trans 'Sept 2011 - Sept 2014' %}</span>
+                <h4>{% trans 'Computer systems and Data Processing' %}</h4>
+                <p>
+                    {% trans 'Studied on Faculty of Informatics in Brno. Degree was completed in 2014.' %}
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- End #education -->
+    <section id="links" class="">
+        <div class="container">
+            <h2 class="heading">{% trans 'Links' %}</h2>
+            <div class="row">
+                <div class="col-sm-4 col-xs-6" align="center">
+                    <a href="https://github.com/dionysio">
+                        <i class="icon-github svg-shadow svg-shadow" aria-hidden="true">{% include 'svg/github.svg' %}</i>
+                    </a>
+                </div>
+                <div class="col-sm-4 col-xs-6" align="center">
+                        <a href="https://www.linkedin.com/in/dionyzlazar/"><i class="icon-linkedin svg-shadow svg-shadow" aria-hidden="true">{% include 'svg/linkedin.svg' %}</i></a>
+                </div>
+                <div class="col-sm-4 col-xs-6" align="center">
+                        <a href="https://www.upwork.com/fl/dionyz"><i class="icon-upwork svg-shadow svg-shadow" aria-hidden="true">{% include 'svg/upwork.svg' %}</i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- End #projects -->
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="heading">{% trans 'Get in Touch' %}</h2>
+            <div class="row">
+                <div id="contact-form" class="col-xs-offset-3">
+                    <form role="form" action="{% url 'contact' %}" method="post">
+                        {% csrf_token %}
+                        {% for field in contact_form %}
+                        <div class="form-group">
+                            {{ field.errors }}
+                            {{ field }}
+                        </div>
+                        {% endfor %}
+                        {% render_honeypot_field "last_name" %}
+                        <div id="send_message" class="m-x-auto">
+                            <button class="btn btn-danger" type="submit">{% trans "Talk to me" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- End #contact-form -->
+    </section>
+{% endblock %}

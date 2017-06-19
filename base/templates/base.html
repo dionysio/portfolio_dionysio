@@ -1,0 +1,88 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% trans 'Dionyz Lazar - Python web developer' %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <![endif]-->
+    <script>
+         document.documentElement.className = document.documentElement.className.replace("no-js","js");
+    </script>
+
+    {% block cdn_css %}{% endblock cdn_css %}
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+    {% if debug %}
+        {% load compress %}
+        {% compress css %}
+            <link rel="stylesheet" type="text/x-scss"  href="{% static 'css/styles.scss' %}" />
+        {% endcompress %}
+    {% else %}
+        <link rel="stylesheet" type="text/css"  href="{% static 'css/styles.css' %}" />
+    {% endif %}
+    {% block extrahead %}{% endblock %}
+</head>
+<body>
+    <header>
+        <ul id="menu" class="shadow-large">
+            <li id="logo" class="hidden-xs">
+                <a href="/">{% trans 'Dionýz Lazar' %}</a>
+            </li>
+            <li>
+                <a href="#about">{% trans 'About' %}</a>
+            </li>
+            <li>
+                <a href="#testimonials">{% trans 'Testimonials' %}</a>
+            </li>
+            <li>
+                <a href="#projects">{% trans 'Projects' %}</a>
+            </li>
+            <li>
+                <a href="#education">{% trans 'Education' %}</a>
+            </li>
+            <li>
+                <a href="#contact">{% trans 'Contact' %}</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="main" role="main">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+
+    {% block footer %}
+    <footer>
+        <div class="container">
+            <div class="row">
+                {% block footer_content %}
+                    <div class="col-sm-5 copyright">
+                        <p>
+                            Copyright &copy; 2017 Dionýz Lazar
+                        </p>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
