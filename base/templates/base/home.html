@@ -59,13 +59,13 @@
             <h2 class="heading">{% trans 'Testimonials' %}</h2>
             <div class="row">
                 {% for testimonial in assignments %}
-
                     <div class="col-lg-8 {% if forloop.counter|divisibleby:2 %}pull-right{% else %}pull-left{% endif %}">
                         <div class="block">
+                            <p class="testimonial-date">{{ testimonial.date|date:"F Y"  }}</p>
                             <blockquote class="testimonial">
                                 <p>{{ testimonial.feedback }}</p>
                             </blockquote>
-                            <p class="testimonial-author">{{testimonial.as_opening_title}}</p>
+                            <p class="testimonial-title">{{ testimonial.title }}</p>
                         </div>
                     </div>
 

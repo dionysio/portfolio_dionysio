@@ -31,13 +31,13 @@ def _get_upwork_data():
 
 def _to_date(date_string):
     try:
-        result = datetime.datetime.strptime(date_string, '%d/%m/%Y')
+        result = datetime.datetime.strptime(date_string, '%m/%d/%Y')
     except ValueError:
         result = datetime.datetime.now()
     return result.date()
 
 
-def get_upwork_data(min_feedback=4.0, min_comment_length=80, date_format='%d/%m/%Y', mappings=('dev_adj_score_recent', 'dev_last_activity',
+def get_upwork_data(min_feedback=4.0, min_comment_length=40, date_format='%d/%m/%Y', mappings=('dev_adj_score_recent', 'dev_last_activity',
                                                                         'dev_total_hours', 'dev_billed_assignments',
                                                                         'dev_profile_title', 'dev_blurb', 'education')):
     data = _get_upwork_data()
@@ -64,17 +64,16 @@ def get_upwork_data(min_feedback=4.0, min_comment_length=80, date_format='%d/%m/
         skills.append(pretty_name)
     result['skills'] = skills
 
-    sorted_assignments = sorted(data['assignments']['hr']['job'] + data['assignments']['fp']['job'],
-                                key=lambda x: _to_date(x['as_to_full']))
     assignments = []
-    for assignment in sorted_assignments:
-        if 'feedback' in assignment and assignment['feedback']['comment'] and float(assignment['feedback']['score']) > min_feedback and len(assignment['feedback']['comment']) > min_comment_length:
-            assignments.append({'feedback': assignment['feedback']['comment'],
-                                'score': float(assignment['feedback']['score']),
-                                'as_from_full': _to_date(assignment.get('as_from_full', assignment.get('as_to_full'))),
-                                'as_to_full': _to_date(assignment['as_to_full']),
-                                'as_opening_title': assignment['as_opening_title']})
-    result['assignments'] = assignments
+    for assignment in (data['assignments']['hr']['job'] + data['assignments']['fp']['job']):
+        if 'feedback' in assignment and assignment['feedback']['comment']:
+            score = float(assignment['feedback']['score'])
+            if score > min_feedback and len(assignment['feedback']['comment']) > min_comment_length:
+                assignments.append({'feedback': assignment['feedback']['comment'],
+                                    'score': score,
+                                    'date': _to_date(assignment['as_to_full']),
+                                    'title': assignment['as_opening_title']})
+    result['assignments'] = sorted(assignments, key=lambda x: x['date'], reverse=True)
 
     exams = []
     sorted_exams = reversed(sorted(data['tsexams']['tsexam'], key=lambda x: float(x['ts_percentile'])))
