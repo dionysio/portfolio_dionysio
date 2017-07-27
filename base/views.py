@@ -8,6 +8,8 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
 from django.views import generic as views
 from honeypot.decorators import check_honeypot
+from django.core.mail import EmailMessage
+
 
 from . import forms
 from .utils import get_upwork_data
@@ -24,8 +26,14 @@ class ContactUs(views.FormView):
         return super().dispatch(*args, **kwargs)
 
     def form_valid(self, form):
-        send_mail(subject=_('Site message from ') + form.cleaned_data['name'], recipient_list=[settings.ADMINS[0][1]],
-                  from_email=form.cleaned_data['email'], message=form.cleaned_data['message'])
+        email = EmailMessage(
+            _('Site message from ') + form.cleaned_data['name'],
+            form.cleaned_data['message'],
+            settings.SERVER_EMAIL,
+            [settings.ADMINS[0][1]],
+            reply_to=[form.cleaned_data['email']]
+        )
+        email.send()
         messages.success(self.request, _('Your message was sent successfully!'))
         return super().form_valid(form)
 
