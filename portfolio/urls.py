@@ -34,4 +34,4 @@ if settings.DEBUG:
         url(r'^__debug__/', include(debug_toolbar.urls)),
         url(r'^admin/', admin.site.urls),
     ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS) + \
-                   static(settings.MEDIA_URL, document_root=settings.MEDIA_DIRS)
+                   static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
