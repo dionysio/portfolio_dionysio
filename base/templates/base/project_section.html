@@ -1,0 +1,31 @@
+<section id="projects" class="">
+    <h2 class="heading">Projects</h2>
+    <div class="container">
+        <div class="row">
+            {% for project in projects %}
+            <div class="row">
+                <div class="project vertical-align shadow-large">
+                    <div class=" col-sm-4 project-image">
+                        <a href="#img{{ forloop.counter0 }}">
+                            <img src="{{ project.image.url }}" class="thumbnail img-responsive">
+                        </a>
+                        <a href="#_" class="lightbox" id="img{{ forloop.counter0 }}">
+                            <img src="{{ project.image.url }}">
+                        </a>
+                    </div>
+                    <!-- End .project-image -->
+                    <div class=" col-sm-8 project-info">
+                        <h3>{{ project.title }}</h3>
+                        {% for paragraph in project.paragraphs %}
+                        <p>
+                            {{paragraph}}
+                        </p>
+                        {% endfor %}
+                    </div>
+                    <!-- End .project-info -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

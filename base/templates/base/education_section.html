@@ -1,0 +1,15 @@
+<section id="education" class="">
+    <div class="container">
+        <h2 class="heading">Education</h2>
+        {% for school in schools %}
+        <div class="block">
+            <h3>{{school.title}}</h3>
+            <span class="education-date">{{school.started|date:"F Y"}} - {{school.finished|date:"F Y"}}</span>
+            <h4>{{school.major}}</h4>
+            <p>
+                {{school.description}}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</section>

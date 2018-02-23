@@ -10,8 +10,8 @@ from django.views import generic as views
 from honeypot.decorators import check_honeypot
 from django.core.mail import EmailMessage
 
-
 from . import forms
+from .models import Project, School
 from .utils import get_upwork_data
 
 
@@ -57,5 +57,8 @@ class HomeView(views.TemplateView):
 
         context['stroke_dasharray'] = 289
         context['stroke_dashoffset'] = context['stroke_dasharray'] - context['stroke_dasharray']*context['dev_adj_score_recent']
+
+        context['projects'] = Project.objects.all()
+        context['schools'] = School.objects.all()
 
         return context
