@@ -1,19 +1,23 @@
 #!/usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import datetime
 import time
+import logging
 
 from django.conf import settings
 from django.core.cache import cache
 
 from upwork import Client
 
+logger = logging.getLogger(__name__)
+
+
 pretty_names = {'amazon-web-services': 'Amazon Web Services', 'api-development': 'API Development',
                 'django-framework': 'Django', 'elasticsearch': 'Elasticsearch', 'flask': 'Flask', 'html5': 'HTML5',
                 'jquery': 'jQuery', 'python': 'Python', 'sql': 'SQL', 'web-scraping': 'Web Scraping'}
 
 
-def _get_upwork_data():
+def _get_upwork_data(retries=3):
     upwork_data = cache.get('upwork_data')
     now = time.time()
     if not upwork_data or now - upwork_data['time'] > settings.UPWORK_DATA_TIMEOUT:
@@ -24,10 +28,14 @@ def _get_upwork_data():
             cache.set('upwork_data', upwork_data)
         except (SystemExit, KeyboardInterrupt):
             raise
-        except:
-            pass
+        except Exception:
+            logger.exception('Exception occurred while getting the upwork data')
+            if retries > 0:
+                logger.info('Retrying _get_upwork_data method')
+                return _get_upwork_data(retries-1)
 
     return upwork_data
+
 
 def _to_date(date_string):
     try:
