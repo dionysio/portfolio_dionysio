@@ -15,23 +15,24 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.conf import settings
+from django.contrib import admin
 
+admin.autodiscover()
 
 urlpatterns = [
     url(r'^', include('base.urls')),
+    url(r'^admin/', admin.site.urls),
 ]
 
 
 if settings.DEBUG:
     from django.conf.urls.static import static
     import debug_toolbar
-    from django.contrib import admin
 
     # admin.site.login_template = 'registration/login.html'
-    admin.autodiscover()
+
 
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
-        url(r'^admin/', admin.site.urls),
     ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS) + \
                    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
