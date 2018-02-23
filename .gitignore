@@ -100,3 +100,4 @@ ENV/
 .idea
 .sass-cache
 srv/db.sqlite3
+public/media/*
