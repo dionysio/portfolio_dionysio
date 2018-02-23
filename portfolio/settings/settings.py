@@ -129,3 +129,10 @@ ADMINS = [('Dio', 'dio@dionysio.com')]
 MEDIA_DIRS = [MEDIA_ROOT]
 
 UPWORK_DATA_TIMEOUT = 60*60*6
+
+
+STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
