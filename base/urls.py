@@ -8,5 +8,5 @@ from base import views
 urlpatterns = [
     url(r'^contact/$', views.ContactUs.as_view(), name='contact'),
 
-    url(r'^$', cache_page(60*60*2)(views.HomeView.as_view()), name='index')
+    url(r'^$', views.HomeView.as_view(), name='index')
 ]
