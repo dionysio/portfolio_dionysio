@@ -3,13 +3,13 @@
     <div class="container">
         <div class="row">
             {% for project in projects %}
-            <div class="row">
+            <div class="row" id="project-{{ project.title|slugify}}">
                 <div class="project vertical-align shadow-large">
                     <div class=" col-sm-4 project-image">
-                        <a href="#img{{ forloop.counter0 }}">
+                        <a href="#img-project{{ forloop.counter0 }}">
                             <img src="{{ project.image.url }}" class="thumbnail img-responsive">
                         </a>
-                        <a href="#_" class="lightbox" id="img{{ forloop.counter0 }}">
+                        <a href="#_" class="lightbox" id="img-project{{ forloop.counter0 }}">
                             <img src="{{ project.image.url }}">
                         </a>
                     </div>
