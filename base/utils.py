@@ -45,7 +45,7 @@ def _to_date(date_string):
     return result.date()
 
 
-def get_upwork_data(min_feedback=4.0, min_comment_length=40, date_format='%d/%m/%Y', mappings=('dev_adj_score_recent', 'dev_last_activity',
+def get_upwork_data(min_feedback=4.0, min_comment_length=40, date_format='%d/%m/%Y', mappings=('dev_adj_score_recent', 'dev_tot_feedback', 'dev_last_activity',
                                                                         'dev_total_hours', 'dev_billed_assignments',
                                                                         'dev_profile_title', 'dev_blurb', 'education')):
     data = _get_upwork_data()
@@ -88,5 +88,7 @@ def get_upwork_data(min_feedback=4.0, min_comment_length=40, date_format='%d/%m/
     for exam in sorted_exams:
         exams.append((exam['ts_name_raw'], float(exam['ts_percentile'])))
     result['exams'] = exams
+
+    result['dev_tot_feedback'] = int(result['dev_tot_feedback'])
 
     return result
