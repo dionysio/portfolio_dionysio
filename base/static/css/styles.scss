@@ -451,8 +451,6 @@ section:nth-child(odd) {
 }
 
 .copyright {
-    padding-top: 20px;
-
     p {
         margin: 0;
         color: $text;
@@ -505,7 +503,7 @@ section:nth-child(odd) {
     background-color: #fff;
 }
 
-#links svg {
+#links div div svg {
     width: 5em;
     height: auto;
  }
@@ -572,10 +570,10 @@ section:nth-child(odd) {
 .hidden-lg {
     display:none;
 }
-#links svg {
+#links div div svg {
     transition: all .2s ease-in-out;
 }
-#links svg:hover {
+#links div div svg:hover {
     transform: scale(1.6,1.6);
 }
 #score svg{
@@ -670,4 +668,17 @@ section:nth-child(odd) {
 .vertical-align {
     display: flex;
     align-items: center;
+}
+
+.section-icon svg {
+    fill: $base-color;
+    pointer-events: none; //disable svg title tooltip
+}
+
+#contact svg {
+    fill: white;
+}
+
+.project-info > h3 {
+    color: $darker-base-color;
 }

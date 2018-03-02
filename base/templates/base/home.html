@@ -21,6 +21,7 @@
 
     <section id="about" class="">
         <div class="container">
+            <i class="section-icon">{% include 'svg/contact_mail.svg' %}</i>
             <h2 class="heading">About Me</h2>
             <div class="row">
                 <div class="project vertical-align  shadow-large">
@@ -36,12 +37,14 @@
                 </div>
             </div><div class="row">
                 <div class="col-md-6">
+                    <i class="section-icon">{% include 'svg/check.svg' %}</i>
                     <h3 class="heading">Job success score</h3>
                     <div id="score">
                         {% include 'svg/score.svg' %}
                     </div>
                 </div>
                 <div class="col-md-6" id="skills">
+                    <i class="section-icon">{% include 'svg/build.svg' %}</i>
                     <h3 class="heading">Skills</h3>
                     <ul>
                         {% for skill in skills %}
@@ -55,6 +58,7 @@
     <!-- End #about -->
     <section id="testimonials" class="">
         <div class="container">
+            <i class="section-icon">{% include 'svg/rate_review.svg' %}</i>
             <h2 class="heading">Testimonials</h2>
             <div class="row">
                 {% for testimonial in assignments %}
@@ -84,6 +88,7 @@
     <!-- End #education -->
     <section id="links" class="">
         <div class="container">
+            <i class="section-icon">{% include 'svg/link.svg' %}</i>
             <h2 class="heading">Links</h2>
             <div class="row">
                 <div class="col-sm-4 col-xs-6" align="center">
@@ -105,6 +110,7 @@
 
     <section id="contact">
         <div class="container">
+            <i class="section-icon">{% include 'svg/message.svg' %}</i>
             <h2 class="heading">Get in Touch</h2>
             <div class="row">
                 <div id="contact-form" class="col-xs-offset-3">
