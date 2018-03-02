@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load i18n %}
-
+{% with "Dionyz Lazar" as name %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -9,11 +9,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dionyz Lazar - Python web developer</title>
-    <meta name="description" content="">
+    <title>{{ name }} - {{dev_profile_title}}</title>
+    <meta name="description" content="{{ description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="msapplication-tap-highlight" content="no">
 
-    <![endif]-->
+    <link rel="canonical" href="https://www.dionysio.com/">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/favicon-16x16.png">
+    <link rel="mask-icon" href="/media/safari-pinned-tab.svg" color="#246c9c">
+    <link rel="shortcut icon" href="/media/favicon.ico">
+    <meta name="theme-color" content="#246c9c">
+
     <script>
          document.documentElement.className = document.documentElement.className.replace("no-js","js");
     </script>
@@ -31,22 +39,22 @@
     <header>
         <ul id="menu" class="shadow-large">
             <li id="logo" class="hidden-xs">
-                <a href="/">Dionýz Lazar</a>
+                <i class="menu-icon">{% include 'svg/logo.svg' %}</i>
             </li>
             <li>
-                <a href="#about">About</a>
+                <a href="#about"><i class="hidden-sm menu-icon">{% include 'svg/contact_mail.svg' %}</i> About</a>
             </li>
             <li>
-                <a href="#testimonials">Testimonials</a>
+                <a href="#testimonials"><i class="hidden-sm menu-icon">{% include 'svg/rate_review.svg' %}</i> Testimonials</a>
             </li>
             <li>
-                <a href="#projects">Projects</a>
+                <a href="#projects"><i class="hidden-sm menu-icon">{% include 'svg/work.svg' %}</i> Projects</a>
             </li>
             <li>
-                <a href="#education">Education</a>
+                <a href="#education"><i class="hidden-sm menu-icon">{% include 'svg/school.svg' %}</i> Education</a>
             </li>
             <li>
-                <a href="#contact">Contact</a>
+                <a href="#contact"><i class="hidden-sm menu-icon">{% include 'svg/message.svg' %}</i> Contact</a>
             </li>
         </ul>
     </header>
@@ -62,23 +70,72 @@
     </div>
 
     {% block footer %}
-    <footer>
-        <div class="container">
-            <div class="row">
-                {% block footer_content %}
-                    <div class="col-sm-5 copyright">
-                        <p>
-                            Copyright &copy; 2017 Dionýz Lazar
-                        </p>
-                    </div>
-                {% endblock %}
-            </div>
+    <div itemscope="" itemtype="https://schema.org/ProfessionalService">
+        <div style="display:none;">
+            <span class="rating-desc" itemscope="" itemtype="http://schema.org/Product">
+             <span itemprop="name">{{ name }}</span>
+             <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                 <span itemprop="ratingValue">{{ dev_adj_score_recent }}</span>
+                 <span itemprop="reviewCount">{{ dev_tot_feedback }}</span>
+                 <a class="ratings" href="#testimonials"></a>
+             </span>
+            </span>
         </div>
-    </footer>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    {% block footer_content %}
+                        <div class="col-sm-5 copyright">
+                            <p>
+                                &copy; Copyright 2017 - {% now "Y" %} <span itemprop="name">{{ name }}</span>
+                            </p>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        </footer>
+    </div>
     {% endblock %}
 
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "service": {
+                "@type": "ProfessionalService",
+                "url": "https://www.dionysio.com",
+                "name": "{{ name }}",
+                "image": "https://www.dionysio.com/media/blue_logo.png",
+                "sameAs": [
+                    "http://www.facebook.com/dionyz.lazar",
+                    "http://instagram.com/diooooooooooooooo",
+                    "http://www.linkedin.com/in/dionyzlazar",
+                    "http://www.upwork.com/fl/dionyz"
+                ],
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Zilina",
+                    "streetAddress": "Nanterska 11",
+                    "postalCode": "01008",
+                    "addressCountry": "SK"
+                }
+            },
+            "product": {
+                "@type": "Product",
+                "name": "{{ name }}",
+                "description": "{{ description }}",
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "{{ dev_adj_score_recent }}",
+                    "reviewCount": "{{ dev_tot_feedback }}"
+                }
+            }
+        }
+    </script>
+
 </body>
 </html>
+{% endwith %}

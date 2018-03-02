@@ -68,14 +68,17 @@ header {
         font-size: 16px;
     }
 
-    a {
+    a:nth-child(n+1) {
         display: block;
         color: $text;
+        fill: $text;
         padding: 25px 15px 25px 15px;
         text-transform: uppercase;
 
         &:hover {
             color: $background;
+            fill: $background;
+            vertical-align: middle;
             text-decoration: none;
             background: #8bbbdb;
         }
@@ -535,12 +538,10 @@ section:nth-child(odd) {
     vertical-align: middle;
 }
 
-
-#logo {
-    border-right: 1px solid $text;
-}
-
 @media only screen and (max-width: 768px) {
+    #menu li {
+        border: none;
+    }
     header a {
         padding: 5px 5px 5px 2px;
     }
@@ -681,4 +682,28 @@ section:nth-child(odd) {
 
 .project-info > h3 {
     color: $darker-base-color;
+}
+
+.menu-icon svg {
+    height: 16px;
+}
+
+#menu svg {
+    pointer-events: none;
+}
+
+#logo {
+    vertical-align: middle;
+    padding-right: 12px;
+}
+
+#logo svg {
+    fill: $darker-base-color;
+    height: 48px;
+    width: 48px;
+    filter: drop-shadow( 0px 3px 6px rgba(0, 0, 0, 0.08)) drop-shadow( 0px 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+#menu li:nth-child(2) {
+    border-left: 1px solid $text;
 }

@@ -51,14 +51,17 @@ class HomeView(views.TemplateView):
         context = super().get_context_data(*args, **kwargs)
         context['contact_form'] = forms.ContactForm()
         context.update(get_upwork_data())
-        context['dev_adj_score_recent'] /= 5
-        context['score'] = int(round(context['dev_adj_score_recent']*100, 0))
+        context['dev_adj_score_recent_normalized'] = context['dev_adj_score_recent'] / 5
+
+        context['score'] = int(round(context['dev_adj_score_recent_normalized']*100, 0))
         context['dev_billed_assignments'] = int(context['dev_billed_assignments'])
 
         context['stroke_dasharray'] = 289
-        context['stroke_dashoffset'] = context['stroke_dasharray'] - context['stroke_dasharray']*context['dev_adj_score_recent']
+        context['stroke_dashoffset'] = context['stroke_dasharray'] - context['stroke_dasharray']*context['dev_adj_score_recent_normalized']
 
         context['projects'] = Project.objects.all()
         context['schools'] = School.objects.all()
+
+        context['description'] = ' '.join((context['dev_blurb'].split('\n')[-1], 'My skills include:', ', '.join(context['skills'])))
 
         return context
