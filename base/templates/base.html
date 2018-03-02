@@ -70,32 +70,19 @@
     </div>
 
     {% block footer %}
-    <div itemscope="" itemtype="https://schema.org/ProfessionalService">
-        <div style="display:none;">
-            <span class="rating-desc" itemscope="" itemtype="http://schema.org/Product">
-             <span itemprop="name">{{ name }}</span>
-             <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
-                 <span itemprop="ratingValue">{{ dev_adj_score_recent }}</span>
-                 <span itemprop="reviewCount">{{ dev_tot_feedback }}</span>
-                 <a class="ratings" href="#testimonials"></a>
-             </span>
-            </span>
-        </div>
-
-        <footer>
-            <div class="container">
-                <div class="row">
-                    {% block footer_content %}
-                        <div class="col-sm-5 copyright">
-                            <p>
-                                &copy; Copyright 2017 - {% now "Y" %} <span itemprop="name">{{ name }}</span>
-                            </p>
-                        </div>
-                    {% endblock %}
-                </div>
+    <footer>
+        <div class="container">
+            <div class="row">
+                {% block footer_content %}
+                    <div class="col-sm-5 copyright">
+                        <p>
+                            &copy; Copyright 2017 - {% now "Y" %} {{ name }}</span>
+                        </p>
+                    </div>
+                {% endblock %}
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
     {% endblock %}
 
     <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
