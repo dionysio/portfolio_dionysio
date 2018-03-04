@@ -102,3 +102,4 @@ ENV/
 srv/db.sqlite3
 public/media/*
 manage.py
+base/templates/svg/*.png
