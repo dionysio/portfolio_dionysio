@@ -34,7 +34,7 @@ def _get_upwork_data(retries=3):
                 logger.info('Retrying _get_upwork_data method')
                 return _get_upwork_data(retries-1)
 
-    return upwork_data
+    return cache.get('upwork_data')
 
 
 def _to_date(date_string):

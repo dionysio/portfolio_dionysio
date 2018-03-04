@@ -128,7 +128,7 @@ STATIC_ROOT = '/var/www/portfolio_dionysio/static'
 ADMINS = [('Dio', 'dio@dionysio.com')]
 MEDIA_DIRS = [MEDIA_ROOT]
 
-UPWORK_DATA_TIMEOUT = 60*60*6
+UPWORK_DATA_TIMEOUT = 60*60*24
 
 
 STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
