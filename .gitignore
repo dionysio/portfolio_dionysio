@@ -99,7 +99,5 @@ ENV/
 .mypy_cache/
 .idea
 .sass-cache
-srv/db.sqlite3
 public/media/*
-manage.py
 base/templates/svg/*.png
