@@ -1,0 +1,42 @@
+{
+  "name": "portfolio",
+  "description": "Portfolio with Upwork integration",
+  "keywords": [
+    "django",
+    "gallery",
+    "portfolio",
+    "postgresql"
+  ],
+  "repository": "https://github.com/dionysio/django_upwork_portfolio",
+  "success_url": "/",
+  "dokku": {
+    "plugins": ["postgres"],
+    "volumes": [
+      {
+        "host": "/var/lib/dokku/data/storage/$APP/media",
+        "app": "/app/media",
+        "phases": "deploy,run"
+      },
+      {
+        "host": "/var/lib/dokku/data/storage/$APP/static",
+        "app": "/app/static",
+        "phases": "deploy,run"
+      }
+    ]
+  },
+  "scripts": {
+    "dokku": {
+      "postdeploy": "python manage.py migrate --no-input && python manage.py collectstatic --no-input"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
