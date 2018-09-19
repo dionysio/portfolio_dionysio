@@ -10,7 +10,11 @@
   "repository": "https://github.com/dionysio/django_upwork_portfolio",
   "success_url": "/",
   "dokku": {
-    "plugins": ["postgres"],
+    "plugins": [{
+        "name":"psql-single-container",
+        "commands":["psql:start", "psql:create $APP","psql:link $APP $APP"]
+      }
+    ],
     "volumes": [
       {
         "host": "/var/lib/dokku/data/storage/$APP/media",
