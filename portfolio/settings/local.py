@@ -33,7 +33,3 @@ STATIC_ROOT = '/tmp/static/'
 
 
 STATICFILES_FINDERS += ('compressor.finders.CompressorFinder',)
-
-ssl_require = not DEBUG
-DATABASES['default'] = dj_database_url.config(
-    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)

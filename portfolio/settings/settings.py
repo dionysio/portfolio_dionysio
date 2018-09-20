@@ -164,3 +164,6 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/media/'
+
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=False)
