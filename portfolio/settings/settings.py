@@ -1,6 +1,6 @@
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
