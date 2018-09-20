@@ -30,7 +30,7 @@
   },
   "scripts": {
     "dokku": {
-      "postdeploy": "python manage.py migrate --no-input && python manage.py collectstatic --no-input"
+      "postdeploy": "python manage.py migrate --no-input && python manage.py collectstatic --no-input && python manage.py createcachetable"
     }
   },
   "addons": [
