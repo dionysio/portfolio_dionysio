@@ -12,7 +12,7 @@
   "dokku": {
     "plugins": [{
         "name":"psql-single-container",
-        "commands":["psql:start", "psql:create $APP","psql:link $APP $APP"]
+        "commands":["psql:create $APP","psql:link $APP $APP"]
       }
     ],
     "volumes": [
