@@ -40,7 +40,7 @@ CACHES = {
     }
 }
 
-DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', False))
 
 ALLOWED_HOSTS = ['.dionysio.com']
 
@@ -165,5 +165,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = '/app/media/'
 MEDIA_URL = '/media/'
 
-DATABASES['default'] = dj_database_url.config(
-    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=False)
+database_args = {
+    'conn_max_age': django_heroku.MAX_CONN_AGE,
+    'ssl_require': False
+}
+if not DEBUG:
+    database_args['engine'] = 'django_db_geventpool.backends.postgresql_psycopg2'
+
+DATABASES['default'] = dj_database_url.config(**database_args)

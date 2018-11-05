@@ -1,9 +1,7 @@
 from .settings import *
-import dj_database_url
 import os
 
 
-DEBUG = True
 TEMPLATES[0]['OPTIONS']['debug'] = THUMBNAIL_DEBUG = SQL_DEBUG = DEBUG
 DEBUG_TOOLBAR = True
 if DEBUG_TOOLBAR:
