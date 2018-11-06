@@ -169,7 +169,6 @@ database_args = {
     'conn_max_age': django_heroku.MAX_CONN_AGE,
     'ssl_require': False
 }
-if not DEBUG:
-    database_args['engine'] = 'django_db_geventpool.backends.postgresql_psycopg2'
 
-DATABASES['default'] = dj_database_url.config(**database_args)
+DATABASES['default'] = dj_database_url.config(
+    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=False)
