@@ -16,6 +16,7 @@
                     </div>
                     <!-- End .project-image -->
                     <div class=" col-sm-8 project-info">
+                        <p class="testimonial-date">{{ project.from_date|date:"F Y"  }} - {{ project.to_date|date:"F Y"  }}</p>
                         <h3>{{ project.title }}</h3>
                         {% for paragraph in project.paragraphs %}
                         <p>

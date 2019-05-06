@@ -27,11 +27,11 @@ class Project(models.Model):
     image = models.ImageField(upload_to='projects/')
     description = models.TextField()
     url = models.URLField(null=True, blank=True)
-
-    order = models.IntegerField(default=0)
+    from_date = models.DateField(null=True, blank=True)
+    to_date = models.DateField(null=True, blank=True)
 
     class Meta:
-        ordering = ['-order']
+        ordering = ['-from_date']
 
     @property
     def paragraphs(self):
