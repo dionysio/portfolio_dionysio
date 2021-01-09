@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
     'compressor',
     'honeypot',
+    'django_distill',
 
     'base',
 ]
@@ -159,10 +160,10 @@ LOGGING['loggers']['django'] = {
     'level': 'INFO'
 }
 
-STATIC_ROOT = '/app/static/'
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, '../static/public')
+STATIC_URL = '/public/'
 
-MEDIA_ROOT = '/app/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, '../static/media')
 MEDIA_URL = '/media/'
 
 database_args = {

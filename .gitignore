@@ -99,5 +99,9 @@ ENV/
 .mypy_cache/
 .idea
 .sass-cache
-public/media/*
 base/templates/svg/*.png
+.firebase
+.firebaserc
+.env
+public
+static
